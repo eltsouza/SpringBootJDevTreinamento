@@ -97,6 +97,7 @@ public class PessoaController {
 
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa.get());
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(idpessoa));
 		return modelAndView;
 		
 	}
@@ -112,7 +113,49 @@ public class PessoaController {
 				
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa);
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
+		return modelAndView;
+	}
+	
+	@GetMapping("/removertelefone/{idtelefone}")
+	public ModelAndView removertelefone(@PathVariable("idtelefone") Long idtelefone) {
+		
+		Pessoa pessoa = telefoneRepository.findById(idtelefone).get().getPessoa();
+		
+		telefoneRepository.deleteById(idtelefone);
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+		modelAndView.addObject("pessoaobj", pessoa);
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoa.getId()));
+		return modelAndView;		
+	}	
+/*	
+	@GetMapping("/editartelefone/{idtelefone}")
+	public ModelAndView editarTelefone(@PathVariable("idtelefone") Long idtelefone) {
+		
+		Pessoa p = telefoneRepository.findById(idtelefone).get().getPessoa();
+		Optional t = telefoneRepository.findById(idtelefone);
+		
+		ModelAndView modelAndView =  new ModelAndView("cadastro/telefones");
+		modelAndView.addObject("telefones",  telefoneRepository.getTelefones(p.getId()));//retorna os telefone pelo id do usuario
+		modelAndView.addObject("telefonesobjt", t.get());//retorna o telefone selecionado
+		modelAndView.addObject("pessoa", p);//retorna a pessoa
 		return modelAndView;
 	}	
+*/
+	
+	@GetMapping("editartelefone/{idtelefone}")
+	public ModelAndView editarTelefone(@PathVariable("idtelefone") Long idtelefone) {
+
+		Optional<Telefone> telefone = telefoneRepository.findById(idtelefone);
+		
+		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
+
+		Pessoa pessoa = telefoneRepository.findById(idtelefone).get().getPessoa();
+		modelAndView.addObject("pessoaobj", pessoa);
+		modelAndView.addObject("telefonesobjt" , telefone.get());
+	
+		return modelAndView;
+	}		
 	
 }

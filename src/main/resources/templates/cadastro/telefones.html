@@ -36,7 +36,7 @@
   
     <h5>Telefones</h5>
     <div class="row">
-      <form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class="col s12">
+      <form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" th:object="${telefonesobjt}" class="col s12">
         <div class="row">
         
     	  <div class="input-field col s6">
@@ -53,7 +53,24 @@
         
         </div>
       </form>
-    </div>  
+    </div>
+    
+	<table class="striped">
+      <thead>
+        <tr>
+          <th>Número</th>
+          <th>Tipo</th>
+          <th>Excluir</th>
+          <th>Editar</th>
+        </tr>
+      </thead>	
+	  <tr th:each="fone : ${telefones}">
+	    <td th:text="${fone.numero}"/>
+	    <td th:text="${fone.tipo}"/>
+        <td><a th:href="@{/removertelefone/{idtelefone}(idtelefone=${fone.id})}">Excluir</a> </td>
+        <td><a th:href="@{/editartelefone/{idtelefone}(idtelefone=${fone.id})}">Editar</a></td>
+	  </tr>
+	</table>    
   
     <script type="text/javascript" src="/materialize/js/materialize.js"></script>
     <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
