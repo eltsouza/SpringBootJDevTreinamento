@@ -1,25 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8">
-    <title>Página Inicial</title>
-
+    <title>Login</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+   
     <!--Declaracao Local    
     <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css" media="screen,projection" />
     <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css" media="screen,projection" /> -->
 	
 	<!-- Declaracao Remota do CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
+
+    <style type="text/css">
+      form input[type=submit] {
+       color: white;
+     }
+    </style> 	
   </head>
-  
   <body>
-     <h1>Olá Spring Boot</h1>
-   
-     <a href="/cadastropessoa">Cadastro Pessoa</a>
-   
+    <h1>Acesso ao sistema</h1>
+     
+	<form th:action="@{/login}" method="post" class="col s12">
+	  <div class="row">
+	    <div class="input-fiel col s6">
+		  <label>Login</label> 
+		  <input type='text' name='username'>
+		</div>
+	  </div>
+      
+	  <div class="row">
+	    <div class="input-fiel col s6">
+		  <label>Senha</label> 
+		  <input type='password' name='password' />
+		</div>
+	  </div>
+      
+      <div class="row">
+	    <div class="input-fiel col s6">
+		  <input name="submit" type="submit" value="submit" class="waves-effect waves-light btn"/>
+		</div>
+	  </div>
+	</form>
+	
 	<!-- Declaracao Remota do CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	
@@ -27,6 +51,6 @@
 	<!--Declaração Local 
 	<script type="text/javascript" src="/materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script> -->
-     
-   </body>
+	
+  </body>
 </html>
